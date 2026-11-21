@@ -1,0 +1,86 @@
+{
+  "generatedAt": "2026-11-21T06:24:13.212Z",
+  "node": "v24.19.0",
+  "grid": "48^3",
+  "maskRes": "96^2",
+  "candidateViews": 48,
+  "timings": {
+    "buildModel": {
+      "coldMs": 283.487,
+      "min": 165.523,
+      "median": 167.74,
+      "p95": 179.149,
+      "max": 179.149,
+      "stddev": 4.94,
+      "samples": 5,
+      "relStddev": 0.0295
+    },
+    "greedy8": {
+      "coldMs": 58.118,
+      "min": 57.746,
+      "median": 58.024,
+      "p95": 60.566,
+      "max": 60.566,
+      "stddev": 1.114,
+      "samples": 5,
+      "relStddev": 0.0192
+    },
+    "stats4": {
+      "coldMs": 22.005,
+      "min": 6.263,
+      "median": 6.403,
+      "p95": 6.582,
+      "max": 6.582,
+      "stddev": 0.102,
+      "samples": 5,
+      "relStddev": 0.0159
+    },
+    "total": {
+      "coldMs": 363.61,
+      "min": 232.299,
+      "median": 232.542,
+      "p95": 243.59,
+      "max": 243.59,
+      "stddev": 4.336,
+      "samples": 5,
+      "relStddev": 0.0186
+    }
+  },
+  "metrics": {
+    "gtVoxels": 9912,
+    "totalVoxels": 110592,
+    "uniform4": {
+      "kept": 15780,
+      "iou": 0.6281368821292775,
+      "hullOnly": 5868
+    },
+    "uniform8": {
+      "kept": 14399,
+      "iou": 0.6883811375789985,
+      "hullOnly": 4487
+    },
+    "uniform16": {
+      "kept": 13848,
+      "iou": 0.7157712305025996,
+      "hullOnly": 3936
+    },
+    "greedy8": {
+      "kept": 13341,
+      "iou": 0.7429727906453789,
+      "hullOnly": 3429,
+      "views": [
+        25,
+        1,
+        24,
+        46,
+        23,
+        18,
+        45,
+        31
+      ]
+    },
+    "falseNegatives": 0,
+    "witnessCompleteness": "13341/13341",
+    "signature": 3446855050
+  }
+}

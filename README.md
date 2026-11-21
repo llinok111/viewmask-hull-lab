@@ -35,6 +35,7 @@ Grid 48³ = 110,592 voxels, analytic solid = 9,912 voxels (8.96%). Silhouettes a
 * Rebuild is bit-identical: hull fingerprint `3446855050`, ground-truth fingerprint `2118723633`, all 48 silhouette masks byte-equal.
 * Scale invariance: the same solid scaled to 1e-6, 1e-3, 1, 1e3, 1e6 yields the identical hull fingerprint `3446855050` (5/5).
 * Timing: cold total 363.610 ms; warm total median 232.542 ms (min 232.299, p95 243.590, stddev 4.336, relStddev 1.86%, n=5). Build median 167.740 ms; greedy-8 median 58.024 ms.
+* Timing is a wall-clock run, not a bit-reproducible artifact. The IoU/kept/hull-only/witness/signature numbers above are deterministic and rebuild bit-identically; the timings are what the committed `bench/result.json` recorded, and the cold-start total is load-dependent: an independent re-run measured 357.493 ms and 400.807 ms cold (median 232.623 ms) against the quoted 363.610 ms / 232.542 ms. Treat cold-start as a range (~357-401 ms here), not a single-value contract.
 
 ### Generalisation (`node bench/generalize.mjs`, 5 shapes at 40³, 48 views, 0 false negatives each)
 

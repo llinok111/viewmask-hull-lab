@@ -36,12 +36,24 @@ Grid 48³ = 110,592 voxels, analytic solid = 9,912 voxels (8.96%). Silhouettes a
 * Scale invariance: the same solid scaled to 1e-6, 1e-3, 1, 1e3, 1e6 yields the identical hull fingerprint `3446855050` (5/5).
 * Timing: cold total 363.610 ms; warm total median 232.542 ms (min 232.299, p95 243.590, stddev 4.336, relStddev 1.86%, n=5). Build median 167.740 ms; greedy-8 median 58.024 ms.
 
+### Generalisation (`node bench/generalize.mjs`, 5 shapes at 40³, 48 views, 0 false negatives each)
+
+| shape | ground truth | uniform-4 | uniform-8 | uniform-16 | greedy-8 |
+| --- | --- | --- | --- | --- | --- |
+| sample: rotated 4-box | 5,892 | 62.976% | 68.977% | 71.784% | **74.095%** |
+| zigzag 3-box | 2,696 | 49.687% | 51.362% | 57.143% | **59.514%** |
+| split plate, 3 slabs | 6,912 | 71.228% | 72.045% | 73.081% | **75.327%** |
+| orthogonal L | 3,920 | 68.990% | 70.113% | 70.976% | **76.043%** |
+| cross, 45° | 2,784 | 55.836% | 58.194% | 60.052% | **60.972%** |
+
+Greedy-8 wins against uniform-8 **5/5** and against uniform-16 **5/5** shapes. Machine-readable output: `bench/generalize.json`.
+
 ## Known limitations
 
 * The silhouette masks are dilated by exactly **1 pixel** (96² grid) so that sampling voxel centres can never create a false negative. That dilation is the only tolerance in the pipeline and it slightly inflates every hull; it is disclosed rather than tuned per result.
 * The test solid is a union of four yaw-rotated boxes. Visual hulls cannot recover true concavities (e.g. holes), so IoU stays below 1 even with 24 views; this is a property of the method, not a bug hidden by the metric.
 * `k` is capped at 24 in the UI because the coverage words hold 48 bits; more views would need a third word.
-* Greedy selection is myopic: it minimises the next hull volume, not the final IoU, and it is not proven optimal. On this scene it beats uniform-8 and uniform-16, but the comparison is one solid and 48 candidate directions.
+* Greedy selection is myopic: it minimises the next hull volume, not the final IoU, and it is not proven optimal. It beats uniform-8 and uniform-16 on all 5 shapes tried (one sample at 48³, four extra shapes at 40³) against the same 48 candidate directions; it may lose on shapes with very different symmetries, and no exhaustive optimal-subset search was run.
 * Rendering draws up to ~15k instanced boxes; it is a viewer, not a performance claim.
 
 ## Layout
